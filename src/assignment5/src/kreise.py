@@ -21,22 +21,11 @@ isactive = False
 
 def fangeGPS(odo):
     global curX, curY, curZ, stuffdone, isactive
-    #if isactive:
-    #    curX = odo.pose.pose.position.x
-    #    curY = odo.pose.pose.position.y
-    #    curZ = odo.pose.pose.position.z
-    #    return
-    #isactive = True
 
     curX = odo.pose.pose.position.x
     curY = odo.pose.pose.position.y
     curZ = odo.pose.pose.position.z
-    #if stuffdone:
-    #    stuffdone = False
-    #    doStuff()
-    #isactive = False
-    #print ("x:",curX,"y:",curY,"z:",curZ)
-    #return (curX,curY,curZ)
+
 
 def fangeWinkel(winkel):
     pub_steeringAngle.publish((float(abs(335-winkel.value))/250))
@@ -59,7 +48,7 @@ def berechneRadius((x,y),(x2,y2),(x3,y3)):
 
     newX = (-(steigungA*x2)+y2+(steigungB*x3)-y3)/(steigungB-steigungA)
     newY = (steigungA*newX)+(steigungA*(-x2))+y2
-    #print (newX,newY)
+ 
     return (math.sqrt((x-newX)**2+(y-newY)**2))/2
 
 def berechneEinlenkWinkel(radius):
@@ -78,7 +67,6 @@ def main():
     while curX == 0.0:
         pass
     pos1 = (curX,curY)
-    #print pos1
     time.sleep(1)
     steering_cmd = NormalizedSteeringCommand()
     steering_cmd.value = 1.0
@@ -92,7 +80,6 @@ def main():
     pub_speed.publish(speed_cmd)
     time.sleep(2)
     pos2 = (curX,curY)
-    #print pos2
     speed_cmd.value = 0.2
     pub_speed.publish(speed_cmd)
     time.sleep(4)
@@ -100,7 +87,6 @@ def main():
     pub_speed.publish(speed_cmd)
     time.sleep(2)
     pos3 = (curX,curY)
-    #print pos3
     print "Radius:",berechneRadius(pos1,pos2,pos3),"Meter"
     print "Winkel:",berechneEinlenkWinkel(berechneRadius(pos1,pos2,pos3)),"Grad, weil niemand was mit Bogenmass anfangen kann"
 
