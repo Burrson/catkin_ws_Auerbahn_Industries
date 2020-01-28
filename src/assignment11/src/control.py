@@ -65,10 +65,7 @@ def steuerung():
 
         korrigiereWinkel(math.atan2(2*punkt.pose.pose.orientation.w*punkt.pose.pose.orientation.z,1-2*(punkt.pose.pose.orientation.z*punkt.pose.pose.orientation.z)))
         ziel = Odometry()
-        #ziel = punkt
         ziel.header.frame_id = "map"
-        #ziel.ns = "richtung"
-        #ziel.id = 0;
         ziel.pose.pose.position.x = punkt.pose.pose.position.x
         ziel.pose.pose.position.y = punkt.pose.pose.position.y
         ziel.pose.pose.position.z = punkt.pose.pose.position.z
@@ -147,9 +144,10 @@ def korrigiereWinkel2(winkel):
     #print("winkel",steering_cmd.value)
     pub_steering.publish(steering_cmd)
 
+#müsste zwar funktionieren, aber am montag ging das GPS, daher konnte ich es nicht ausprobieren.
 def speedcontroller(realspeed):
     global speed
-    speed_cmd.value = speed/curvature()
+    speed_cmd.value = speed/curvature() #im zweifel einfach das curvature auskommentieren
     #print (realspeed.value,speed_cmd.value,speed)
     pub_speed.publish(speed_cmd)
 
