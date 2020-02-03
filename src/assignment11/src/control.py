@@ -144,7 +144,7 @@ def korrigiereWinkel2(winkel):
     #print("winkel",steering_cmd.value)
     pub_steering.publish(steering_cmd)
 
-#müsste zwar funktionieren, aber am montag ging das GPS, daher konnte ich es nicht ausprobieren.
+#muesste zwar funktionieren, aber am montag ging das GPS, daher konnte ich es nicht ausprobieren.
 def speedcontroller(realspeed):
     global speed
     speed_cmd.value = speed/curvature() #im zweifel einfach das curvature auskommentieren
